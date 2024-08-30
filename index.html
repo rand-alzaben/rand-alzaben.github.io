@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Computer Components Order Form</title>
+
+    <!-- CSS Styles -->
+    <style>
+        /* font and background color to the entire body */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ffffff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        /* Style for the container that holds the form */
+        .container {
+            background-color: #f6b4ca;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            width: 100%;
+        }
+
+        /* Center the title and set its color */
+        h1 {
+            text-align: center;
+            color: #333333;
+        }
+
+        /* Style for labels */
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #333333;
+        }
+
+        /* Style for input fields and dropdowns */
+        input,
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        /* Style for the button */
+        .btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        /* button color on hover */
+        .btn:hover {
+            background-color: #db48ca;
+        }
+
+        /* Style for the total price display */
+        .total {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Main container for the form -->
+    <div class="container">
+        <!-- Form title -->
+        <h1> Build your own PC!</h1>
+
+        <!-- Order form -->
+        <form id="orderForm">
+            <!-- CPU selection dropdown -->
+            <label for="cpu">Select CPU:</label>
+            <select id="cpu" name="cpu">
+                <option value="Intel i5" data-price="200">Intel i5 - $150</option>
+                <option value="Intel i7" data-price="300">Intel i7 - $250</option>
+                <option value="AMD Ryzen 5" data-price="250">AMD Ryzen 5 - $300</option>
+                <option value="AMD Ryzen 7" data-price="350">AMD Ryzen 7 - $350</option>
+            </select>
+
+            <!-- GPU selection dropdown -->
+            <label for="gpu">Select GPU:</label>
+            <select id="gpu" name="gpu">
+                <option value="NVIDIA GTX 1660" data-price="400">NVIDIA GTX 1660 - $350</option>
+                <option value="NVIDIA RTX 3060" data-price="500">NVIDIA RTX 3060 - $400</option>
+                <option value="AMD Radeon RX 5700" data-price="450">AMD Radeon RX 5700 - $450</option>
+            </select>
+
+            <!-- RAM selection dropdown -->
+            <label for="ram">Select RAM:</label>
+            <select id="ram" name="ram">
+                <option value="16GB" data-price="100">16GB - $100</option>
+                <option value="32GB" data-price="150">32GB - $150</option>
+                <option value="64GB" data-price="250">64GB - $250</option>
+            </select>
+
+            <!-- Storage selection dropdown -->
+            <label for="storage">Select Storage:</label>
+            <select id="storage" name="storage">
+                <option value="500GB SSD" data-price="100">500GB SSD - $100</option>
+                <option value="1TB SSD" data-price="150">1TB SSD - $150</option>
+                <option value="2TB SSD" data-price="250">2TB SSD - $250</option>
+            </select>
+            <!-- Note textarea -->
+            <label for="note">Leave a note (optional):</label>
+            <textarea id="note" name="note" placeholder="Enter additional details here"></textarea>
+
+            <!-- Button to calculate total price -->
+            <button type="button" class="btn" onclick="calculateTotal()">Calculate total price</button>
+            <!-- Button to submit the order -->
+            <button type="button" class="btn" onclick="submitOrder()">Submit your Order</button>
+        </form>
+
+        <!-- Display the total price here -->
+        <div class="total" id="totalPrice">Total Price: $0</div>
+    </div>
+
+    <!-- JavaScript calculating total price and handling form submission -->
+    <script>
+        function calculateTotal() {
+            let total = 0;
+
+            // Get selected options from each dropdown
+            const cpu = document.getElementById('cpu');
+            const gpu = document.getElementById('gpu');
+            const ram = document.getElementById('ram');
+            const storage = document.getElementById('storage');
+
+            // Add the price of the selected CPU to the total
+            total += parseInt(cpu.options[cpu.selectedIndex].getAttribute('data-price'));
+
+            // Add the price of the selected GPU to the total
+            total += parseInt(gpu.options[gpu.selectedIndex].getAttribute('data-price'));
+
+            // Add the price of the selected RAM to the total
+            total += parseInt(ram.options[ram.selectedIndex].getAttribute('data-price'));
+
+            // Add the price of the selected Storage to the total
+            total += parseInt(storage.options[storage.selectedIndex].getAttribute('data-price'));
+
+            // Update the total price displayed on the page
+            document.getElementById('totalPrice').innerText = `Total Price: $${total}`;
+        }
+        function submitOrder() {
+            // Get selected components and the note
+            const cpu = document.getElementById('cpu').value;
+            const gpu = document.getElementById('gpu').value;
+            const ram = document.getElementById('ram').value;
+            const storage = document.getElementById('storage').value;
+            const note = document.getElementById('note').value;
+
+            // Alert the user with the selected components and note
+            alert(`Order Submitted!\n\nSelected Components:\nCPU: ${cpu}\nGPU: ${gpu}\nRAM: ${ram}\nStorage: ${storage}\n\nNote: ${note}`);
+        }
+
+
+    </script>
+
+</body>
+
+</html>
